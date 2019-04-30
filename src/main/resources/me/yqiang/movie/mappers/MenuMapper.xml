@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.yqiang.movie.repository.MenuMapper">
+  <resultMap id="BaseResultMap" type="me.yqiang.movie.domain.Menu">
+    <constructor>
+      <idArg column="menu_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="menu_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="menu_href" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="menu_parent_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="menu_flag" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="menu_icon" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="create_date" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="update_date" javaType="java.lang.String" jdbcType="CHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    menu_id, menu_name, menu_href, menu_parent_id, menu_flag, menu_icon, create_date, 
+    update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from menu
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from menu
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="me.yqiang.movie.domain.Menu">
+    insert into menu (menu_id, menu_name, menu_href, 
+      menu_parent_id, menu_flag, menu_icon, 
+      create_date, update_date)
+    values (#{menuId,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{menuHref,jdbcType=VARCHAR}, 
+      #{menuParentId,jdbcType=VARCHAR}, #{menuFlag,jdbcType=VARCHAR}, #{menuIcon,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=CHAR}, #{updateDate,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="me.yqiang.movie.domain.Menu">
+    insert into menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        menu_id,
+      </if>
+      <if test="menuName != null">
+        menu_name,
+      </if>
+      <if test="menuHref != null">
+        menu_href,
+      </if>
+      <if test="menuParentId != null">
+        menu_parent_id,
+      </if>
+      <if test="menuFlag != null">
+        menu_flag,
+      </if>
+      <if test="menuIcon != null">
+        menu_icon,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuHref != null">
+        #{menuHref,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParentId != null">
+        #{menuParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuFlag != null">
+        #{menuFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIcon != null">
+        #{menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=CHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="me.yqiang.movie.domain.Menu">
+    update menu
+    <set>
+      <if test="menuName != null">
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuHref != null">
+        menu_href = #{menuHref,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParentId != null">
+        menu_parent_id = #{menuParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuFlag != null">
+        menu_flag = #{menuFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIcon != null">
+        menu_icon = #{menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=CHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=CHAR},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="me.yqiang.movie.domain.Menu">
+    update menu
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_href = #{menuHref,jdbcType=VARCHAR},
+      menu_parent_id = #{menuParentId,jdbcType=VARCHAR},
+      menu_flag = #{menuFlag,jdbcType=VARCHAR},
+      menu_icon = #{menuIcon,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=CHAR},
+      update_date = #{updateDate,jdbcType=CHAR}
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.yqiang.movie.repository.VisitUserInfoMapper">
+  <resultMap id="BaseResultMap" type="me.yqiang.movie.domain.VisitUserInfo">
+    <constructor>
+      <idArg column="id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="source" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ip_address" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ip" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="host_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="visit_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_name, source, ip_address, ip, host_name, visit_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from visit_user_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from visit_user_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="me.yqiang.movie.domain.VisitUserInfo">
+    insert into visit_user_info (id, user_name, source, 
+      ip_address, ip, host_name, 
+      visit_date)
+    values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
+      #{ipAddress,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{hostName,jdbcType=VARCHAR}, 
+      #{visitDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="me.yqiang.movie.domain.VisitUserInfo">
+    insert into visit_user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="ipAddress != null">
+        ip_address,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="hostName != null">
+        host_name,
+      </if>
+      <if test="visitDate != null">
+        visit_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddress != null">
+        #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="hostName != null">
+        #{hostName,jdbcType=VARCHAR},
+      </if>
+      <if test="visitDate != null">
+        #{visitDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="me.yqiang.movie.domain.VisitUserInfo">
+    update visit_user_info
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddress != null">
+        ip_address = #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="hostName != null">
+        host_name = #{hostName,jdbcType=VARCHAR},
+      </if>
+      <if test="visitDate != null">
+        visit_date = #{visitDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="me.yqiang.movie.domain.VisitUserInfo">
+    update visit_user_info
+    set user_name = #{userName,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      ip_address = #{ipAddress,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      host_name = #{hostName,jdbcType=VARCHAR},
+      visit_date = #{visitDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

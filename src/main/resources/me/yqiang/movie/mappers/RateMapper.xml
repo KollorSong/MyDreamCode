@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.yqiang.movie.repository.RateMapper">
+  <resultMap id="BaseResultMap" type="me.yqiang.movie.domain.Rate">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="movie_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="rate" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, movie_id, rate, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rate
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from rate
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="me.yqiang.movie.domain.Rate">
+    insert into rate (id, movie_id, rate, 
+      user_id)
+    values (#{id,jdbcType=BIGINT}, #{movieId,jdbcType=BIGINT}, #{rate,jdbcType=DOUBLE}, 
+      #{userId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="me.yqiang.movie.domain.Rate">
+    insert into rate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="movieId != null">
+        movie_id,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="movieId != null">
+        #{movieId,jdbcType=BIGINT},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DOUBLE},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="me.yqiang.movie.domain.Rate">
+    update rate
+    <set>
+      <if test="movieId != null">
+        movie_id = #{movieId,jdbcType=BIGINT},
+      </if>
+      <if test="rate != null">
+        rate = #{rate,jdbcType=DOUBLE},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="me.yqiang.movie.domain.Rate">
+    update rate
+    set movie_id = #{movieId,jdbcType=BIGINT},
+      rate = #{rate,jdbcType=DOUBLE},
+      user_id = #{userId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <!--//@Query(value = "SELECT  rate.movie_id AS movieId ,AVG(rate.rate) AS rate,COUNT(rate.movie_id) AS num FROM rate GROUP BY rate.movie_id",nativeQuery = true)-->
+
+
+
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.yqiang.movie.repository.MovieCategoryMapper">
+  <resultMap id="BaseResultMap" type="me.yqiang.movie.domain.MovieCategory">
+    <constructor>
+      <idArg column="movie_category_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="movie_category_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    movie_category_code, movie_category_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from movie_category
+    where movie_category_code = #{movieCategoryCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from movie_category
+    where movie_category_code = #{movieCategoryCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="me.yqiang.movie.domain.MovieCategory">
+    insert into movie_category (movie_category_code, movie_category_name
+      )
+    values (#{movieCategoryCode,jdbcType=VARCHAR}, #{movieCategoryName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="me.yqiang.movie.domain.MovieCategory">
+    insert into movie_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="movieCategoryCode != null">
+        movie_category_code,
+      </if>
+      <if test="movieCategoryName != null">
+        movie_category_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="movieCategoryCode != null">
+        #{movieCategoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="movieCategoryName != null">
+        #{movieCategoryName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="me.yqiang.movie.domain.MovieCategory">
+    update movie_category
+    <set>
+      <if test="movieCategoryName != null">
+        movie_category_name = #{movieCategoryName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where movie_category_code = #{movieCategoryCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="me.yqiang.movie.domain.MovieCategory">
+    update movie_category
+    set movie_category_name = #{movieCategoryName,jdbcType=VARCHAR}
+    where movie_category_code = #{movieCategoryCode,jdbcType=VARCHAR}
+  </update>
+</mapper>
