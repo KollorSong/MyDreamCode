@@ -39,11 +39,13 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>1.2.2</version>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -109,6 +111,11 @@
             <groupId>com.cloudinary</groupId>
             <artifactId>cloudinary-taglib</artifactId>
             <version>1.18.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tobato</groupId>
+            <artifactId>fastdfs-client</artifactId>
+            <version>1.26.2</version>
         </dependency>
 
         <!--<dependency>
